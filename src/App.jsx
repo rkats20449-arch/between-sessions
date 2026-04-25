@@ -65,9 +65,7 @@ export default function TherapyCompanion() {
     system: SYSTEM_PROMPT,
     messages: conversationHistory.current,
   }),
-});
-
-        body: JSON.stringify({
+body: JSON.stringify({
           model: "claude-sonnet-4-20250514",
           max_tokens: 1000,
           system: SYSTEM_PROMPT,
