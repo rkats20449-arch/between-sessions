@@ -56,13 +56,17 @@ export default function TherapyCompanion() {
     setMessages(prev => [...prev, { type: "user", text: userText }]);
     setIsLoading(true);
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json",
-                  "x-api-key" : import.meta.env.ANTHROPIC_API_KEY,
-                  "anthropic-version": "2023-06-01",
-                  "anthropic-dangerous-direct-browser-access":"true"
-                 },
+      const response = await fetch("/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 1000,
+    system: SYSTEM_PROMPT,
+    messages: conversationHistory.current,
+  }),
+});
+
         body: JSON.stringify({
           model: "claude-sonnet-4-20250514",
           max_tokens: 1000,
